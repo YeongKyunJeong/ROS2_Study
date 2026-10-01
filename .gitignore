@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# HTML별 학습 자료 보조 문서 (프로젝트 핵심 Markdown 문서는 유지)
+# 명명 규칙: <이름>-guide.md 또는 <이름>.html.md
+/Lecture/**/*-guide.md
+/Lecture/**/*.html.md
