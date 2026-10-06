@@ -15,6 +15,8 @@ ROS 2의 기초, 활용 사례, 센서와 회전 표현을 공부하는 자료 �
 | 로봇 센서 | 로봇 센서 실험실 | [웹페이지 보기](https://yeongkyunjeong.github.io/ROS2_Study/Lecture/robot-sensors.html) |
 | 스마트폰 센서 | 손안의 센서 실험실 | [웹페이지 보기](https://yeongkyunjeong.github.io/ROS2_Study/Lecture/smartphone-sensors.html) |
 | 짐벌락과 쿼터니언 | 수학적 설명, 회전 실험과 변환 계산기 | [웹페이지 보기](https://yeongkyunjeong.github.io/ROS2_Study/Lecture/gimbal-lock-quaternion.html) |
+  - [쿼터니언 회전 증명](https://yeongkyunjeong.github.io/ROS2_Study/Lecture/gimbal-lock-quaternion.html#proof)
+  - [qvq⁻¹ 직접 계산하기](https://yeongkyunjeong.github.io/ROS2_Study/Lecture/gimbal-lock-quaternion.html#sandwich-example)
 
 ## 이용 방법
 
