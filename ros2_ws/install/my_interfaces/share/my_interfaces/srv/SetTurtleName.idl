@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from my_interfaces/srv/SetTurtleName.srv
+// generated code does not contain a copyright notice
+
+
+module my_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "my_interfaces/srv/SetTurtleName.srv")
+    struct SetTurtleName_Request {
+      @verbatim (language="comment", text=
+        "새로 붙일 이름")
+      string new_name;
+    };
+    struct SetTurtleName_Response {
+      @verbatim (language="comment", text=
+        "응답 : 성공 여부")
+      boolean success;
+
+      @verbatim (language="comment", text=
+        "응답 : 사람이 읽을 안내문")
+      string message;
+    };
+  };
+};

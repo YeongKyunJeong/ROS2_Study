@@ -1,0 +1,6 @@
+# my_interfaces/srv/SetTurtleName.srv
+
+string new_name     # 새로 붙일 이름
+---
+bool success        # 응답 : 성공 여부
+string message      # 응답 : 사람이 읽을 안내문

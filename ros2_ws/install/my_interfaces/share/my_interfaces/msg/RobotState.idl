@@ -1,0 +1,30 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from my_interfaces/msg/RobotState.msg
+// generated code does not contain a copyright notice
+
+#include "sensor_msgs/msg/BatteryState.idl"
+
+module my_interfaces {
+  module msg {
+    module RobotState_Constants {
+      @verbatim (language="comment", text=
+        "상수 : 대기 상태를 뜻하는 코드")
+      const int8 STATE_IDLE = 0;
+      @verbatim (language="comment", text=
+        "상수 : 이동 중을 뜻하는 코드")
+      const int8 STATE_MOVING = 1;
+      @verbatim (language="comment", text=
+        "상수 : 오류 상태를 뜻하는 코드")
+      const int8 STATE_ERROR = 2;
+    };
+    @verbatim (language="comment", text=
+      "my_interfaces/msg/RobotState.msg")
+    struct RobotState {
+      @verbatim (language="comment", text=
+        "필드 : 지금 상태 (위 코드 중 하나가 담김)")
+      int8 current_state;
+
+      sensor_msgs::msg::BatteryState battery_state;
+    };
+  };
+};

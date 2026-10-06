@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from mission_interface/msg/Mission.msg
+// generated code does not contain a copyright notice
+
+
+module mission_interface {
+  module msg {
+    module Mission_Constants {
+      @verbatim (language="comment", text=
+        "진행 상태 코드")
+      const int64 MISSION_WORKING_STATE = 0;
+      @verbatim (language="comment", text=
+        "성공 상태 코드")
+      const int64 MISSION_SUCCESS_STATE = 1;
+      @verbatim (language="comment", text=
+        "실패 상태 코드")
+      const int64 MISSION_FAIL_STATE = 2;
+    };
+    @verbatim (language="comment", text=
+      "mission_interface/Mission.msg")
+    struct Mission {
+      uint8 structure_needs_at_least_one_member;
+    };
+  };
+};
