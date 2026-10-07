@@ -1,0 +1,3 @@
+source;share/nuriho/hook/pythonpath.ps1
+source;share/nuriho/hook/pythonpath.dsv
+source;share/nuriho/hook/pythonpath.sh
