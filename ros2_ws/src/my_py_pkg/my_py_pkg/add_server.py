@@ -18,7 +18,7 @@ class AddServer(Node):
     def on_request(self, req, res):
         sum = req.a + req.b 
         res.sum = sum
-        self.get_logger().info(f"{req.a} + {req.b} = {req.sum}")
+        self.get_logger().info(f"{req.a} + {req.b} = {res.sum}")
         return res
         
 def main():
