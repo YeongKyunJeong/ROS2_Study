@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "my_interfaces/msg/detail/turtle_goal__struct.h"
-#include "my_interfaces/msg/detail/turtle_goal__type_support.h"
-#include "rosidl_typesupport_interface/macros.h"
 #include "my_interfaces/msg/detail/turtle_goal__functions.h"
+#include "rosidl_typesupport_interface/macros.h"
+#include "my_interfaces/msg/detail/turtle_goal__type_support.h"
 
 #ifdef __cplusplus
 extern "C"

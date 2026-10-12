@@ -1,0 +1,12 @@
+# my_interface/action/CountUp.action
+
+# Goal
+int32 target         # 목표 수
+
+---
+# Result
+int32[] sequence     # 지금까지 센 수
+
+---
+# Feedback
+int32 current        # 현재 센 수

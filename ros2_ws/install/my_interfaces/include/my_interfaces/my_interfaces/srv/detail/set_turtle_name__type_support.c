@@ -4,10 +4,10 @@
 
 #include <string.h>
 
+#include "my_interfaces/srv/detail/set_turtle_name__struct.h"
+#include "rosidl_typesupport_interface/macros.h"
 #include "my_interfaces/srv/detail/set_turtle_name__type_support.h"
 #include "my_interfaces/srv/detail/set_turtle_name__functions.h"
-#include "rosidl_typesupport_interface/macros.h"
-#include "my_interfaces/srv/detail/set_turtle_name__struct.h"
 
 #ifdef __cplusplus
 extern "C"

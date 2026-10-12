@@ -1,0 +1,31 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from my_interfaces/action/CountUp.action
+// generated code does not contain a copyright notice
+
+
+module my_interfaces {
+  module action {
+    @verbatim (language="comment", text=
+      "my_interface/action/CountUp.action")
+    struct CountUp_Goal {
+      @verbatim (language="comment", text=
+        "Goal" "\n"
+        "목표 수")
+      int32 target;
+    };
+    @verbatim (language="comment", text=
+      "Result")
+    struct CountUp_Result {
+      @verbatim (language="comment", text=
+        "지금까지 센 수")
+      sequence<int32> sequence;
+    };
+    @verbatim (language="comment", text=
+      "Feedback")
+    struct CountUp_Feedback {
+      @verbatim (language="comment", text=
+        "현재 센 수")
+      int32 current;
+    };
+  };
+};

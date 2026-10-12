@@ -1,3 +1,5 @@
+action/CountUp.action
+action/CountUp.idl
 msg/RobotState.idl
 msg/RobotState.msg
 msg/TurtleGoal.idl

@@ -32,6 +32,9 @@ setup(
             'add_server = my_py_pkg.add_server:main',
             'add_client = my_py_pkg.add_client:main',
             'executor_demo = my_py_pkg.executor_demo:main',
+            'count_up_server = my_py_pkg.count_up_server:main',
+            'count_up_client = my_py_pkg.count_up_client:main',
+            'param_demo = my_py_pkg.param_demo:main',
 
             # 실행 이름     = 실행 패키지명.파일명:함수명명
         ],

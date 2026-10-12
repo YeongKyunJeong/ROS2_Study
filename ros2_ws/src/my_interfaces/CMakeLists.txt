@@ -20,6 +20,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/RobotState.msg"
   "srv/AddThreeInts.srv"
   "srv/SetTurtleName.srv"
+  "action/CountUp.action"
   DEPENDENCIES geometry_msgs
   DEPENDENCIES sensor_msgs
 )
