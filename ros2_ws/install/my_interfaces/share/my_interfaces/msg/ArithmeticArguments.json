@@ -1,0 +1,36 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "my_interfaces/msg/ArithmeticArguments",
+      "fields": [
+        {
+          "name": "argument_a",
+          "type": {
+            "type_id": 10,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "argument_b",
+          "type": {
+            "type_id": 10,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "my_interfaces/msg/ArithmeticArguments",
+      "hash_string": "RIHS01_dd6d1b9688dd99f2c53d27a603af60184d3b72a16d370576d3bce0f35478cb6e"
+    }
+  ]
+}

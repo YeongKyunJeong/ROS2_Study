@@ -121,3 +121,54 @@ impl rosidl_runtime_rs::Message for RobotState {
 }
 
 
+// Corresponds to my_interfaces__msg__ArithmeticArguments
+/// my_interfaces/msg/ArithmeticArguments.msg
+
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
+#[derive(Clone, Debug, PartialEq, PartialOrd)]
+pub struct ArithmeticArguments {
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub argument_a: f32,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub argument_b: f32,
+
+}
+
+
+
+impl Default for ArithmeticArguments {
+  fn default() -> Self {
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::msg::rmw::ArithmeticArguments::default())
+  }
+}
+
+impl rosidl_runtime_rs::Message for ArithmeticArguments {
+  type RmwMsg = super::msg::rmw::ArithmeticArguments;
+
+  fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
+    match msg_cow {
+      std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+        argument_a: msg.argument_a,
+        argument_b: msg.argument_b,
+      }),
+      std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+      argument_a: msg.argument_a,
+      argument_b: msg.argument_b,
+      })
+    }
+  }
+
+  fn from_rmw_message(msg: Self::RmwMsg) -> Self {
+    Self {
+      argument_a: msg.argument_a,
+      argument_b: msg.argument_b,
+    }
+  }
+}
+
+

@@ -1,0 +1,9 @@
+# my_interfaces/srv/ArithmeticOperator.srv
+
+int8 PLUS = 1
+int8 MINUS = 2
+int8 MULTIPLY = 3
+int8 DIVISION = 4
+int8 arithmetic_operator    # 실제 전달될 필드
+---
+float32 arithmetic_result

@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from my_interfaces/srv/Calc.srv
+// generated code does not contain a copyright notice
+
+
+module my_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "my_interfaces/srv/Calc.srv")
+    struct Calc_Request {
+      double a;
+
+      double b;
+
+      string op;
+    };
+    struct Calc_Response {
+      double result;
+
+      boolean ok;
+    };
+  };
+};

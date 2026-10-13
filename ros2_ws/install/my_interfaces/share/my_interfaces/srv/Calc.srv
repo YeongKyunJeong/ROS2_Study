@@ -1,0 +1,8 @@
+# my_interfaces/srv/Calc.srv
+
+float64 a
+float64 b
+string op
+---
+float64 result
+bool ok

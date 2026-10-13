@@ -206,6 +206,234 @@ impl rosidl_runtime_rs::Message for SetTurtleName_Response {
 }
 
 
+// Corresponds to my_interfaces__srv__Calc_Request
+
+// This struct is not documented.
+#[allow(missing_docs)]
+
+#[allow(non_camel_case_types)]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
+#[derive(Clone, Debug, PartialEq, PartialOrd)]
+pub struct Calc_Request {
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub a: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub b: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub op: std::string::String,
+
+}
+
+
+
+impl Default for Calc_Request {
+  fn default() -> Self {
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::Calc_Request::default())
+  }
+}
+
+impl rosidl_runtime_rs::Message for Calc_Request {
+  type RmwMsg = super::srv::rmw::Calc_Request;
+
+  fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
+    match msg_cow {
+      std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+        a: msg.a,
+        b: msg.b,
+        op: msg.op.as_str().into(),
+      }),
+      std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+      a: msg.a,
+      b: msg.b,
+        op: msg.op.as_str().into(),
+      })
+    }
+  }
+
+  fn from_rmw_message(msg: Self::RmwMsg) -> Self {
+    Self {
+      a: msg.a,
+      b: msg.b,
+      op: msg.op.to_string(),
+    }
+  }
+}
+
+
+// Corresponds to my_interfaces__srv__Calc_Response
+
+// This struct is not documented.
+#[allow(missing_docs)]
+
+#[allow(non_camel_case_types)]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
+#[derive(Clone, Debug, PartialEq, PartialOrd)]
+pub struct Calc_Response {
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub result: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub ok: bool,
+
+}
+
+
+
+impl Default for Calc_Response {
+  fn default() -> Self {
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::Calc_Response::default())
+  }
+}
+
+impl rosidl_runtime_rs::Message for Calc_Response {
+  type RmwMsg = super::srv::rmw::Calc_Response;
+
+  fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
+    match msg_cow {
+      std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+        result: msg.result,
+        ok: msg.ok,
+      }),
+      std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+      result: msg.result,
+      ok: msg.ok,
+      })
+    }
+  }
+
+  fn from_rmw_message(msg: Self::RmwMsg) -> Self {
+    Self {
+      result: msg.result,
+      ok: msg.ok,
+    }
+  }
+}
+
+
+// Corresponds to my_interfaces__srv__ArithmeticOperator_Request
+
+// This struct is not documented.
+#[allow(missing_docs)]
+
+#[allow(non_camel_case_types)]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
+#[derive(Clone, Debug, PartialEq, PartialOrd)]
+pub struct ArithmeticOperator_Request {
+    /// 실제 전달될 필드
+    pub arithmetic_operator: i8,
+
+}
+
+impl ArithmeticOperator_Request {
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const PLUS: i8 = 1;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MINUS: i8 = 2;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MULTIPLY: i8 = 3;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const DIVISION: i8 = 4;
+
+}
+
+
+impl Default for ArithmeticOperator_Request {
+  fn default() -> Self {
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::ArithmeticOperator_Request::default())
+  }
+}
+
+impl rosidl_runtime_rs::Message for ArithmeticOperator_Request {
+  type RmwMsg = super::srv::rmw::ArithmeticOperator_Request;
+
+  fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
+    match msg_cow {
+      std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+        arithmetic_operator: msg.arithmetic_operator,
+      }),
+      std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+      arithmetic_operator: msg.arithmetic_operator,
+      })
+    }
+  }
+
+  fn from_rmw_message(msg: Self::RmwMsg) -> Self {
+    Self {
+      arithmetic_operator: msg.arithmetic_operator,
+    }
+  }
+}
+
+
+// Corresponds to my_interfaces__srv__ArithmeticOperator_Response
+
+// This struct is not documented.
+#[allow(missing_docs)]
+
+#[allow(non_camel_case_types)]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
+#[derive(Clone, Debug, PartialEq, PartialOrd)]
+pub struct ArithmeticOperator_Response {
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub arithmetic_result: f32,
+
+}
+
+
+
+impl Default for ArithmeticOperator_Response {
+  fn default() -> Self {
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::ArithmeticOperator_Response::default())
+  }
+}
+
+impl rosidl_runtime_rs::Message for ArithmeticOperator_Response {
+  type RmwMsg = super::srv::rmw::ArithmeticOperator_Response;
+
+  fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
+    match msg_cow {
+      std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+        arithmetic_result: msg.arithmetic_result,
+      }),
+      std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
+      arithmetic_result: msg.arithmetic_result,
+      })
+    }
+  }
+
+  fn from_rmw_message(msg: Self::RmwMsg) -> Self {
+    Self {
+      arithmetic_result: msg.arithmetic_result,
+    }
+  }
+}
+
+
 
 
 
@@ -248,6 +476,50 @@ impl rosidl_runtime_rs::Service for SetTurtleName {
     fn get_type_support() -> *const std::ffi::c_void {
         // SAFETY: No preconditions for this function.
         unsafe { rosidl_typesupport_c__get_service_type_support_handle__my_interfaces__srv__SetTurtleName() }
+    }
+}
+
+
+
+
+#[link(name = "my_interfaces__rosidl_typesupport_c")]
+extern "C" {
+    fn rosidl_typesupport_c__get_service_type_support_handle__my_interfaces__srv__Calc() -> *const std::ffi::c_void;
+}
+
+// Corresponds to my_interfaces__srv__Calc
+#[allow(missing_docs, non_camel_case_types)]
+pub struct Calc;
+
+impl rosidl_runtime_rs::Service for Calc {
+    type Request = Calc_Request;
+    type Response = Calc_Response;
+
+    fn get_type_support() -> *const std::ffi::c_void {
+        // SAFETY: No preconditions for this function.
+        unsafe { rosidl_typesupport_c__get_service_type_support_handle__my_interfaces__srv__Calc() }
+    }
+}
+
+
+
+
+#[link(name = "my_interfaces__rosidl_typesupport_c")]
+extern "C" {
+    fn rosidl_typesupport_c__get_service_type_support_handle__my_interfaces__srv__ArithmeticOperator() -> *const std::ffi::c_void;
+}
+
+// Corresponds to my_interfaces__srv__ArithmeticOperator
+#[allow(missing_docs, non_camel_case_types)]
+pub struct ArithmeticOperator;
+
+impl rosidl_runtime_rs::Service for ArithmeticOperator {
+    type Request = ArithmeticOperator_Request;
+    type Response = ArithmeticOperator_Response;
+
+    fn get_type_support() -> *const std::ffi::c_void {
+        // SAFETY: No preconditions for this function.
+        unsafe { rosidl_typesupport_c__get_service_type_support_handle__my_interfaces__srv__ArithmeticOperator() }
     }
 }
 

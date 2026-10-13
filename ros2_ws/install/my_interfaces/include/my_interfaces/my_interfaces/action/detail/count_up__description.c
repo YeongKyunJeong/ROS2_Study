@@ -203,9 +203,9 @@ my_interfaces__action__CountUp_FeedbackMessage__get_type_hash(
 #include <string.h>
 
 // Include directives for referenced types
-#include "service_msgs/msg/detail/service_event_info__functions.h"
 #include "unique_identifier_msgs/msg/detail/uuid__functions.h"
 #include "builtin_interfaces/msg/detail/time__functions.h"
+#include "service_msgs/msg/detail/service_event_info__functions.h"
 
 // Hashes for external referenced types
 #ifndef NDEBUG
@@ -1174,6 +1174,7 @@ static char toplevel_type_raw_source[] =
   "---\n"
   "# Result\n"
   "int32[] sequence     # \\xec\\xa7\\x80\\xea\\xb8\\x88\\xea\\xb9\\x8c\\xec\\xa7\\x80 \\xec\\x84\\xbc \\xec\\x88\\x98\n"
+  "\n"
   "---\n"
   "# Feedback\n"
   "int32 current        # \\xed\\x98\\x84\\xec\\x9e\\xac \\xec\\x84\\xbc \\xec\\x88\\x98";
@@ -1191,7 +1192,7 @@ my_interfaces__action__CountUp__get_individual_type_description_source(
   static const rosidl_runtime_c__type_description__TypeSource source = {
     {my_interfaces__action__CountUp__TYPE_NAME, 28, 28},
     {action_encoding, 6, 6},
-    {toplevel_type_raw_source, 163, 163},
+    {toplevel_type_raw_source, 164, 164},
   };
   return &source;
 }

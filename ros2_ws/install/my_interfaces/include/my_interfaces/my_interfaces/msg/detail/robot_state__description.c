@@ -24,8 +24,8 @@ my_interfaces__msg__RobotState__get_type_hash(
 
 // Include directives for referenced types
 #include "std_msgs/msg/detail/header__functions.h"
-#include "builtin_interfaces/msg/detail/time__functions.h"
 #include "sensor_msgs/msg/detail/battery_state__functions.h"
+#include "builtin_interfaces/msg/detail/time__functions.h"
 
 // Hashes for external referenced types
 #ifndef NDEBUG

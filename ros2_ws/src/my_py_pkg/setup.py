@@ -35,6 +35,9 @@ setup(
             'count_up_server = my_py_pkg.count_up_server:main',
             'count_up_client = my_py_pkg.count_up_client:main',
             'param_demo = my_py_pkg.param_demo:main',
+            'clac_server = my_py_pkg.clac_server:main',
+            'argument = my_py_pkg.argument:main',
+            'calculator = my_py_pkg.calculator:main',
 
             # 실행 이름     = 실행 패키지명.파일명:함수명명
         ],

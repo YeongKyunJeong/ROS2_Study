@@ -21,6 +21,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/AddThreeInts.srv"
   "srv/SetTurtleName.srv"
   "action/CountUp.action"
+  "srv/Calc.srv"
+  "msg/ArithmeticArguments.msg"
+  "srv/ArithmeticOperator.srv"
+  "action/ArithmeticChecker.action"
   DEPENDENCIES geometry_msgs
   DEPENDENCIES sensor_msgs
 )

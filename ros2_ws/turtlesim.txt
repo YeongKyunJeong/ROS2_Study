@@ -1,0 +1,8 @@
+/turtlesim:
+  ros__parameters:
+    background_b: 132
+    background_g: 47
+    background_r: 146
+    holonomic: true
+
+
