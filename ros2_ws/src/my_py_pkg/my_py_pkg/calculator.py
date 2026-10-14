@@ -20,10 +20,11 @@ class Calculator(Node):
         self.argument_a = 0.0
         self.argument_b = 0.0
         self.argument_result = 0.0
-        group = ReentrantCallbackGroup()
+        group1 = ReentrantCallbackGroup()
+        group2 = ReentrantCallbackGroup()
         self.create_subscription(ArithmeticArguments, "arithmetic_argument", self.on_argument , 10)
-        self.create_service(ArithmeticOperator, "arithmetic_operator", self.on_operator, callback_group = group)
-        ActionServer(self, ArithmeticChecker, "arithmetic_checker", self.on_check, callback_group = group)
+        self.create_service(ArithmeticOperator, "arithmetic_operator", self.on_operator, callback_group = group1)
+        ActionServer(self, ArithmeticChecker, "arithmetic_checker", self.on_check, callback_group = group2)
         self.get_logger().info("========= Calculator Ready =========")
 
     def on_check(self, goal_handle):
@@ -62,7 +63,10 @@ def main():
     rclpy.init()
     node = Calculator()
     try:
-        rclpy.spin(node)
+        # rclpy.spin(node)
+        ex = MultiThreadedExecutor()    # 실행기 정의
+        ex.add_node(node = node)        # 실행기에게 노드 전달
+        ex.spin()
     except Exception as e:
         pass
     finally:

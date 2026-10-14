@@ -2,6 +2,8 @@ action/ArithmeticChecker.action
 action/ArithmeticChecker.idl
 action/CountUp.action
 action/CountUp.idl
+action/PlayRound.action
+action/PlayRound.idl
 msg/ArithmeticArguments.idl
 msg/ArithmeticArguments.msg
 msg/RobotState.idl
@@ -14,5 +16,7 @@ srv/ArithmeticOperator.idl
 srv/ArithmeticOperator.srv
 srv/Calc.idl
 srv/Calc.srv
+srv/RoundGuess.idl
+srv/RoundGuess.srv
 srv/SetTurtleName.idl
 srv/SetTurtleName.srv

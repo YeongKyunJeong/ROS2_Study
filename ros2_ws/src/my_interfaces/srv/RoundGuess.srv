@@ -1,0 +1,8 @@
+# my_interface/srv/RoundGuess.srv
+
+# 예측 문자
+string letter
+---
+bool correct
+bool done
+string board

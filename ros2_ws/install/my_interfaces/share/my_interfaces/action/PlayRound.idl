@@ -1,0 +1,32 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from my_interfaces/action/PlayRound.action
+// generated code does not contain a copyright notice
+
+
+module my_interfaces {
+  module action {
+    @verbatim (language="comment", text=
+      "my_interface/action/PlayRound.action")
+    struct PlayRound_Goal {
+      @verbatim (language="comment", text=
+        "Goal - 문제")
+      string word;
+    };
+    @verbatim (language="comment", text=
+      "Result - 완료 여부, 결과")
+    struct PlayRound_Result {
+      boolean done;
+
+      string board_result;
+
+      int32 tries;
+    };
+    @verbatim (language="comment", text=
+      "Feedback - 문자, 진행상황")
+    struct PlayRound_Feedback {
+      string letter;
+
+      string board_progress;
+    };
+  };
+};

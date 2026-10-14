@@ -25,12 +25,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ArithmeticArguments.msg"
   "srv/ArithmeticOperator.srv"
   "action/ArithmeticChecker.action"
+  "action/PlayRound.action"
+  "srv/RoundGuess.srv"
   DEPENDENCIES geometry_msgs
   DEPENDENCIES sensor_msgs
 )
 ament_export_dependencies(rosidl_default_runtime)
-
-
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
