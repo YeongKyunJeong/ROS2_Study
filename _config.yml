@@ -1,0 +1,3 @@
+exclude:
+  - ros2_ws/
+  - hangman_bag/
