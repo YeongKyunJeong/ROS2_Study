@@ -1,3 +1,4 @@
 exclude:
   - ros2_ws/
+  - test_ws/
   - hangman_bag/
