@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="제조·디지털 트윈의 Asset Administration Shell(AAS): 개념, 구성, 표준, ROS2 연동과 실습 방향을 정리한 학습 자료.">
+  <title>AAS 이해하기 — 제조 자산과 디지털 트윈</title>
+  <style>
+    :root { color-scheme: light; --ink:#172c3b; --muted:#526674; --accent:#086f73; --line:#d9e3e7; --paper:#fff; --bg:#f3f6f7; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:24px; }
+    body { margin:0; color:var(--ink); background:var(--bg); font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR",sans-serif; line-height:1.85; word-break:keep-all; overflow-wrap:anywhere; }
+    a { color:var(--accent); text-underline-offset:4px; }
+    a:hover { text-decoration-thickness:2px; }
+    a:focus-visible { outline:3px solid #db8b25; outline-offset:5px; }
+    .skip { position:absolute; left:20px; top:-100px; background:white; padding:10px; z-index:5; }
+    .skip:focus { top:10px; }
+    .wrap { width:min(1080px, calc(100% - 48px)); margin:auto; }
+    header { background:#122e3d; color:#fff; padding:68px 0 54px; border-bottom:6px solid #36b7ac; }
+    .eyebrow { margin:0 0 12px; color:#91e2d9; font-size:.8rem; letter-spacing:.15em; font-weight:700; }
+    h1 { font-size:clamp(2.4rem,6vw,4.3rem); line-height:1.15; letter-spacing:-.05em; margin:0 0 18px; }
+    .subtitle { margin:0; font-size:1.15rem; color:#d4e2ea; }
+    .intro { max-width:760px; margin:26px 0 24px; font-size:1.13rem; }
+    .meta { display:flex; flex-wrap:wrap; gap:10px; font-size:.78rem; color:#d4e2ea; }
+    .meta span { padding:4px 12px; border:1px solid #50717f; border-radius:30px; }
+    nav { padding:22px 0; border-bottom:1px solid var(--line); background:white; }
+    nav .wrap { display:flex; flex-wrap:wrap; gap:10px 26px; }
+    nav a { font-size:.9rem; font-weight:650; text-decoration:none; }
+    main { padding:20px 0 60px; }
+    section { margin-top:30px; padding:34px; background:var(--paper); border:1px solid var(--line); border-radius:16px; }
+    h2 { margin:0 0 20px; font-size:1.6rem; letter-spacing:-.04em; line-height:1.5; }
+    h2 .num { color:var(--accent); font-size:.85rem; margin-right:12px; vertical-align:middle; }
+    h3 { font-size:1.08rem; margin:0 0 10px; }
+    p { margin:0 0 16px; }
+    p:last-child { margin-bottom:0; }
+    .lead { font-size:1.13rem; }
+    .callout { padding:20px 24px; border-left:4px solid #11948a; background:#edf8f6; border-radius:0 10px 10px 0; margin:22px 0; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:22px 0; }
+    .card { border:1px solid var(--line); border-radius:10px; padding:20px; background:#f9fbfc; }
+    .card p { font-size:.94rem; }
+    .source,.note { color:var(--muted); font-size:.85rem; }
+    .table-scroll { overflow-x:auto; margin:20px 0; }
+    table { width:100%; border-collapse:collapse; font-size:.94rem; min-width:580px; }
+    caption { text-align:left; color:var(--muted); font-size:.85rem; margin-bottom:10px; }
+    th,td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { background:#edf3f5; font-weight:700; }
+    td:first-child { font-weight:650; }
+    pre { background:#142f3d; color:#e3f2f5; padding:24px; border-radius:10px; overflow:auto; font-size:.92rem; line-height:1.8; word-break:normal; }
+    code { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .flow { display:flex; align-items:stretch; gap:8px; margin:24px 0; }
+    .node { flex:1; text-align:center; padding:18px 10px; border:1px solid #bdd8d7; background:#edf8f6; border-radius:10px; font-weight:700; font-size:.92rem; }
+    .node small { display:block; font-weight:400; color:var(--muted); margin-top:5px; }
+    .arrow { align-self:center; color:var(--accent); }
+    ol,ul { padding-left:24px; }
+    li { margin:9px 0; }
+    .refs li { padding-bottom:12px; border-bottom:1px solid var(--line); }
+    .refs small { display:block; color:var(--muted); }
+    footer { padding:0 0 34px; color:var(--muted); font-size:.85rem; }
+    @media(max-width:700px) { .wrap { width:calc(100% - 28px); } header { padding:44px 0 36px; } section { padding:23px 19px; } .grid { grid-template-columns:1fr; } .flow { flex-direction:column; } .arrow { transform:rotate(90deg); } h2 { font-size:1.35rem; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    @media print { body { background:white; font-size:10pt; } .wrap { width:100%; } header { background:white; color:var(--ink); padding:20px 0; } .eyebrow,.subtitle,.meta { color:var(--muted); } nav,.skip { display:none; } section { border:0; padding:16px 0; margin-top:12px; } .card,.callout,pre,tr,.flow { break-inside:avoid; } h2,h3 { break-after:avoid; } pre { background:#f1f4f5; color:var(--ink); } .table-scroll { overflow:visible; } table { min-width:0; } a { color:var(--ink); } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">INDUSTRIAL DIGITAL TWIN · STUDY NOTE</p>
+      <h1>AAS 이해하기</h1>
+      <p class="subtitle">Asset Administration Shell · 자산 관리 셸</p>
+      <p class="intro">로봇과 설비의 정보를 서로 다른 시스템에서도 이해할 수 있도록.<br>AAS의 개념부터 데이터 구조, ROS2 연동까지 살펴보는 제조·디지털 트윈 학습 자료입니다.</p>
+      <div class="meta"><span>조사 기준 · 2026.10.15</span><span>공식 자료 기반</span><span>ROS2 연동 예시 포함</span></div>
+    </div>
+  </header>
+  <nav aria-label="문서 목차"><div class="wrap">
+    <a href="#concept">01 개념</a><a href="#structure">02 구성</a><a href="#twin">03 디지털 트윈</a><a href="#ros2">04 ROS2 연동</a><a href="#tools">05 도구·실습</a><a href="#sources">06 참고 자료</a>
+  </div></nav>
+  <main id="main" class="wrap">
+    <section id="concept">
+      <h2><span class="num">01</span>장비 정보를 공유하는 공통 언어</h2>
+      <p class="lead"><strong>AAS는 제조 자산의 정보를 공통된 구조와 의미로 표현하고 교환하는 표준화된 디지털 표현입니다.</strong></p>
+      <p>로봇·모터·센서의 사양, 상태, 문서 등을 다른 회사의 시스템에서도 이해하고 활용하도록 만드는 것이 목적입니다. 기본 개념과 구조는 IEC 63278-1에 정의되어 있습니다.</p>
+      <div class="callout"><strong>기계가 읽을 수 있는 ‘신분증과 정보 창구’</strong><br>신분증으로 장비를 식별하고, 정보 창구를 통해 기술 사양·매뉴얼·운전 상태 등에 접근한다고 생각하면 쉽습니다.</div>
+      <h3>왜 값만 전달해서는 부족할까요?</h3>
+      <p>서로 다른 장비가 <code>temperature</code>, <code>temp</code>, <code>온도</code>라는 이름으로 데이터를 보내면, 이름만으로는 모터 온도인지 주변 온도인지 또는 단위가 무엇인지 알기 어렵습니다.</p>
+      <p>AAS에서는 <code>semanticId</code>로 개념을 식별하고, 개념 설명과 ECLASS·IEC CDD 같은 사전을 활용해 의미를 명확히 할 수 있습니다. <strong>같은 형식만 쓰는 것을 넘어 같은 템플릿과 의미 정의를 사용하는 것이 중요합니다.</strong></p>
+      <p class="source">근거: <a href="#ref1">[1] AAS 메타모델</a>, <a href="#ref2">[2] 의미 정의</a>, <a href="#ref3">[3] Digital Nameplate</a></p>
+    </section>
+    <section id="structure">
+      <h2><span class="num">02</span>AAS 안에는 무엇이 들어갈까?</h2>
+      <div class="table-scroll" role="region" aria-label="AAS 구성 요소 표" tabindex="0"><table>
+        <caption>구성 요소와 로봇에 적용한 예시</caption>
+        <thead><tr><th scope="col">구성 요소</th><th scope="col">역할</th><th scope="col">로봇 예시</th></tr></thead>
+        <tbody>
+          <tr><td>Asset</td><td>표현하려는 물리적 또는 비물리적 자산</td><td>공장에 설치된 로봇 한 대</td></tr>
+          <tr><td>AAS</td><td>자산 식별 정보와 관련 Submodel 참조 제공</td><td>로봇의 디지털 정보 진입점</td></tr>
+          <tr><td>Submodel</td><td>특정 관점의 정보를 묶음</td><td>명판, 기술 사양, 운전 상태</td></tr>
+          <tr><td>SubmodelElement</td><td>속성·파일·기능 등의 개별 요소 표현</td><td>가반하중, 매뉴얼, 동작 호출</td></tr>
+          <tr><td>ConceptDescription</td><td>사용하는 개념의 의미 설명</td><td>가반하중의 정의와 단위</td></tr>
+        </tbody>
+      </table></div>
+      <p>AAS에는 여러 Submodel이 연결되며 각각 별도로 관리하거나 제공할 수 있습니다. IDTA는 <strong>Digital Nameplate</strong>, <strong>Technical Data</strong> 등의 공통 템플릿을 제공합니다.</p>
+      <pre aria-label="로봇 AAS 구조 예시"><code>로봇 AAS
+├─ 명판
+│  ├─ 제조사 · 모델명
+│  └─ 일련번호
+├─ 기술 사양
+│  ├─ 최대 가반하중
+│  └─ 작업 반경
+├─ 운전 상태
+│  ├─ 현재 작업 · 가동 여부
+│  └─ 오류 코드
+└─ 유지보수 정보
+   ├─ 매뉴얼
+   └─ 최근 점검 기록</code></pre>
+      <p class="note">위 트리는 개념 설명용입니다. 운전 상태·유지보수 항목을 포함한 전체 구성이 공식 표준 템플릿이라는 뜻은 아닙니다.</p>
+      <p class="source">근거: <a href="#ref1">[1] AAS 메타모델</a>, <a href="#ref4">[4] 공식 Submodel 템플릿 목록</a></p>
+    </section>
+    <section id="twin">
+      <h2><span class="num">03</span>디지털 트윈에서 AAS의 역할</h2>
+      <p>디지털 트윈은 현실 자산을 디지털로 표현하고 활용하는 더 넓은 개념입니다. AAS는 그 안에서 <strong>자산 정보를 표준화해 제공하는 기반</strong>으로 활용할 수 있습니다.</p>
+      <div class="grid">
+        <article class="card"><h3>정적 정보</h3><p>제조사, 사양서, 인증서, 매뉴얼처럼 자주 바뀌지 않는 정보를 제공합니다.</p></article>
+        <article class="card"><h3>동적 정보</h3><p>실제 장비와 연결하여 현재 상태나 측정값을 제공하도록 구성합니다.</p></article>
+        <article class="card"><h3>기능·서비스</h3><p>필요한 기능을 모델링하고 실제 구현과 연결해 외부에서 활용하도록 설계합니다.</p></article>
+      </div>
+      <p><strong>AAS를 만들었다고 물리 시뮬레이션이나 예지보전 기능이 자동으로 생기지는 않습니다.</strong> 시뮬레이션 모델, 분석 로직, 데이터 수집과 동기화는 목적에 맞게 별도로 구현하고 연결해야 합니다.</p>
+      <p class="source">근거: <a href="#ref5">[5] Eclipse BaSyx 아키텍처</a></p>
+    </section>
+    <section id="ros2">
+      <h2><span class="num">04</span>ROS2와 연결하는 방법</h2>
+      <p>ROS2는 Topic·Service·Action으로 노드 간 통신과 로봇 기능을 구현합니다. AAS와 연결할 때는 필요한 데이터를 변환하는 노드를 두고, 외부 시스템이 사용할 정보 모델로 매핑할 수 있습니다.</p>
+      <p class="note">아래 구성은 ROS2 학습 환경을 위한 설계 제안입니다. 공식 ROS2–AAS 표준 매핑이나 즉시 실행 가능한 구현을 의미하지 않습니다.</p>
+      <div class="flow" aria-label="로봇과 센서, ROS2 노드, 변환 노드, AAS 서버, 공장 시스템 순서의 양방향 연동">
+        <div class="node">로봇·센서<small>실제 자산</small></div><span class="arrow" aria-hidden="true">↔</span>
+        <div class="node">ROS2 노드<small>상태·기능</small></div><span class="arrow" aria-hidden="true">↔</span>
+        <div class="node">변환 노드<small>의미·단위 매핑</small></div><span class="arrow" aria-hidden="true">↔</span>
+        <div class="node">AAS 서버<small>표준 정보 제공</small></div><span class="arrow" aria-hidden="true">↔</span>
+        <div class="node">공장 시스템<small>조회·활용</small></div>
+      </div>
+      <h3>예시: 배터리 상태 제공</h3>
+      <ol>
+        <li>ROS2 노드가 배터리 상태를 Topic으로 발행합니다.</li>
+        <li>변환 노드가 메시지를 구독하고 값의 의미와 단위를 확인합니다.</li>
+        <li>AAS의 운전 상태 Submodel에 값과 측정 시각을 반영합니다.</li>
+        <li>외부 대시보드가 AAS를 조회해 배터리 상태를 표시합니다.</li>
+      </ol>
+      <div class="callout"><strong>설계 시 구분할 것</strong><br>고속 모터 제어는 기존 제어 경로에서 처리하고, AAS에는 외부 시스템이 필요한 상태와 기능을 제공하는 구성을 권합니다. 연결이 끊겼을 때 오래된 값이 현재 값으로 오인되지 않도록 갱신 시각과 유효성을 함께 관리하세요.</div>
+      <p class="source">관련 근거: <a href="#ref6">[6] ROS2 통신 구조</a>, <a href="#ref7">[7] BaSyx 장비 연동 예제</a></p>
+    </section>
+    <section id="tools">
+      <h2><span class="num">05</span>구현 도구와 첫 실습</h2>
+      <div class="table-scroll" role="region" aria-label="도구와 파일 형식 표" tabindex="0"><table>
+        <thead><tr><th scope="col">도구·형식</th><th scope="col">용도</th></tr></thead>
+        <tbody>
+          <tr><td>AASX Package Explorer</td><td>AAS와 Submodel을 작성하고 패키지 내용을 확인하는 도구</td></tr>
+          <tr><td>Eclipse BaSyx</td><td>AAS 서버, Registry, Web UI, 데이터 연결 구성 요소 등을 제공하는 오픈소스 플랫폼</td></tr>
+          <tr><td>AASX</td><td>AAS 모델과 관련 자료를 패키지로 교환하는 파일 형식</td></tr>
+          <tr><td>AAS API</td><td>온라인으로 AAS와 Submodel 등에 접근하기 위한 인터페이스 명세</td></tr>
+        </tbody>
+      </table></div>
+      <p>조사 기준일에 IDTA 공식 규격 페이지는 <strong>Release 26-01</strong>을 제공하며, 메타모델·API·데이터 명세·보안·AASX 파일 형식을 구분합니다. 도구를 선택할 때는 <strong>지원 규격 버전과 사용할 템플릿 버전</strong>을 함께 확인하세요.</p>
+      <h3>추천 실습: 로봇 한 대의 명판과 배터리 상태</h3>
+      <ol>
+        <li><strong>정적 모델 작성:</strong> 명판 템플릿을 참고해 제조사·모델·일련번호를 입력합니다.</li>
+        <li><strong>서버에서 조회:</strong> AAS 서버와 Web UI를 통해 모델을 확인합니다.</li>
+        <li><strong>ROS2 연결:</strong> 배터리 상태를 구독하는 변환 노드로 값을 갱신합니다.</li>
+        <li><strong>검증:</strong> 값과 단위가 일치하는지, 데이터가 끊겼을 때 오래된 상태를 구별할 수 있는지 확인합니다.</li>
+      </ol>
+      <p class="source">근거: <a href="#ref8">[8] BaSyx 소개</a>, <a href="#ref9">[9] IDTA 규격 목록</a>. 실습 순서는 이 문서의 제안입니다.</p>
+    </section>
+    <section id="sources">
+      <h2><span class="num">06</span>공식 참고 자료</h2>
+      <p class="note">조사 기준: 2026년 10월 15일. 규격과 도구는 개정될 수 있으므로 구현 시 해당 버전의 문서를 확인하세요.</p>
+      <ol class="refs">
+        <li id="ref1"><a href="https://industrialdigitaltwin.io/aas-specifications/IDTA-01001/v3.2/introduction.html">IDTA — AAS Metamodel: Introduction</a><small>AAS·자산·Submodel 관계와 IEC 63278-1 기반 개념</small></li>
+        <li id="ref2"><a href="https://industrialdigitaltwin.io/aas-specifications/IDTA-01003-a/v3.2/annex/background.html">IDTA — Data Specifications: Background Information</a><small>ConceptDescription, 의미 식별자와 속성 정의</small></li>
+        <li id="ref3"><a href="https://industrialdigitaltwin.org/wp-content/uploads/2024/11/IDTA-02006-3-0_Submodel_Digital-Nameplate.pdf">IDTA — Digital Nameplate 3.0 (PDF)</a><small>산업용 장비 명판 템플릿과 의미 정보 활용 · 최신 템플릿은 다음 목록 참조</small></li>
+        <li id="ref4"><a href="https://industrialdigitaltwin.org/content-hub/teilmodelle">IDTA — Registered AAS Submodel Templates</a><small>공식 템플릿, 버전 및 발행 상태</small></li>
+        <li id="ref5"><a href="https://eclipse.dev/basyx/architecture/">Eclipse BaSyx — Architecture</a><small>정적·동적 자산 정보와 AAS 기반 아키텍처</small></li>
+        <li id="ref6"><a href="https://design.ros2.org/articles/actions.html">ROS2 Design — Actions</a><small>Topic·Service·Action의 통신 역할</small></li>
+        <li id="ref7"><a href="https://eclipse.dev/basyx/asset_integration/">Eclipse BaSyx — Asset Integration</a><small>실제 장비 데이터와 AAS를 연결하는 예제</small></li>
+        <li id="ref8"><a href="https://eclipse.dev/basyx/about/">Eclipse BaSyx — About</a><small>플랫폼과 관련 도구 소개</small></li>
+        <li id="ref9"><a href="https://industrialdigitaltwin.org/en/content-hub/aasspecifications">IDTA — AAS Specifications</a><small>메타모델, API, 보안, 패키지 형식 등 공식 규격 진입점</small></li>
+      </ol>
+    </section>
+  </main>
+  <footer class="wrap">AAS 학습 자료 · 외부 라이브러리 없이 열리는 단일 HTML 문서 · 문서 본문은 오프라인 열람 가능하며 참고 링크는 인터넷 연결이 필요합니다.</footer>
+</body>
+</html>
