@@ -27,6 +27,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "action/ArithmeticChecker.action"
   "action/PlayRound.action"
   "srv/RoundGuess.srv"
+  "action/PatrolAction.action"
   DEPENDENCIES geometry_msgs
   DEPENDENCIES sensor_msgs
 )

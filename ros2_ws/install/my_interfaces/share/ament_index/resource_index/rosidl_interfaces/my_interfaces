@@ -2,6 +2,8 @@ action/ArithmeticChecker.action
 action/ArithmeticChecker.idl
 action/CountUp.action
 action/CountUp.idl
+action/PatrolAction.action
+action/PatrolAction.idl
 action/PlayRound.action
 action/PlayRound.idl
 msg/ArithmeticArguments.idl
