@@ -1,0 +1,6 @@
+source;share/dig_soil/hook/pythonpath.ps1
+source;share/dig_soil/hook/pythonpath.dsv
+source;share/dig_soil/hook/pythonpath.sh
+source;share/dig_soil/hook/ament_prefix_path.ps1
+source;share/dig_soil/hook/ament_prefix_path.dsv
+source;share/dig_soil/hook/ament_prefix_path.sh

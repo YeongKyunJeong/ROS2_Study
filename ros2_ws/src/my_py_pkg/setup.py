@@ -38,6 +38,8 @@ setup(
             'clac_server = my_py_pkg.clac_server:main',
             'argument = my_py_pkg.argument:main',
             'calculator = my_py_pkg.calculator:main',
+            'qos_talker = my_py_pkg.qos_talker:main',
+            'qos_listener = my_py_pkg.qos_listener:main',
 
             # 실행 이름     = 실행 패키지명.파일명:함수명명
         ],
