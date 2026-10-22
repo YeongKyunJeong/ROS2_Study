@@ -40,7 +40,12 @@ setup(
             'calculator = my_py_pkg.calculator:main',
             'qos_talker = my_py_pkg.qos_talker:main',
             'qos_listener = my_py_pkg.qos_listener:main',
-
+            "static_sensor_tf=my_py_pkg.static_sensor_tf:main",
+            "tf_reader=my_py_pkg.tf_reader:main",
+            "wheel_driver=my_py_pkg.wheel_driver:main",
+            "chaser=my_py_pkg.chaser:main",
+            "camera_mount=my_py_pkg.camera_mount:main",
+            "fake_camera=my_py_pkg.fake_camera:main",
             # 실행 이름     = 실행 패키지명.파일명:함수명명
         ],
     },
