@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TurtleBot3 · 강의 시연 트랙 설계안</title>
+<style>
+:root{color-scheme:dark;--bg:#101820;--panel:#18232e;--ink:#edf3f6;--muted:#acbfcb;--mint:#71e5bd;--line:#344654}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;line-height:1.6}main{max-width:1240px;margin:auto;padding:38px 28px}header{display:flex;justify-content:space-between;gap:22px;align-items:start;margin-bottom:28px}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:2px;font-weight:700}h1{font-size:clamp(25px,4vw,38px);letter-spacing:-1.3px;line-height:1.25;margin:10px 0}p{margin:8px 0;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:30px;padding:8px 15px;white-space:nowrap;font-size:13px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:24px}.map-panel,aside{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}.map-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}.map-head span{color:var(--muted);font-size:12px}svg{display:block;width:100%;height:auto;margin:12px 0}svg text{font-family:inherit;fill:#c5d3dc;font-size:15px}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.swatch{width:18px;height:8px;display:inline-block;background:#667c8d}.swatch.route{height:0;border-top:2px dashed var(--mint);background:none}.swatch.obs{background:#f4b56c}.controls{border-top:1px solid var(--line);margin-top:18px;padding-top:17px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}button{font:inherit;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:9px;padding:9px 13px}button:hover{background:#263947}button:focus-visible,input:focus-visible{outline:3px solid var(--mint);outline-offset:3px}#play{background:var(--mint);color:#11271f;border-color:var(--mint);font-weight:700}input[type=range]{accent-color:var(--mint);flex:1;min-width:110px}.fine{font-size:12px;color:var(--muted)}h2{font-size:17px;margin:0 0 14px}.zones{display:grid;gap:9px}.zones button{text-align:left;display:flex;gap:12px;align-items:center}.zones button[aria-pressed=true]{background:#26473e;border-color:var(--mint)}.num{font-size:12px;color:var(--mint);font-weight:700}.zones small{display:block;color:var(--muted);font-size:12px}.detail{min-height:150px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.detail strong{font-size:15px}.detail p{font-size:14px}.spec{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}.spec article{border-top:1px solid var(--line);padding-top:18px}.spec h2{font-size:14px;color:var(--mint);margin-bottom:9px}.spec p{font-size:14px}.value{font-size:25px;font-weight:650;color:var(--ink)}footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}a{color:var(--mint)}.point{fill:#172a2a;stroke:var(--mint);stroke-width:2}.point-label{fill:var(--mint);font-size:14px;text-anchor:middle;dominant-baseline:middle}.wall{fill:#667c8d;stroke:#94a7b4;stroke-width:1}.obs{fill:#f4b56c;stroke:#ffdab0;stroke-width:1.5}#highlight{fill:#71e5bd18;stroke:var(--mint);stroke-width:1.5;stroke-dasharray:4 4;pointer-events:none}@media(max-width:900px){.layout{grid-template-columns:1fr}aside{display:grid;grid-template-columns:1fr 1fr;gap:16px}aside h2{grid-column:1/-1;margin-bottom:0}.detail{margin:0;padding:0 0 0 15px;border-top:0;border-left:1px solid var(--line)}}@media(max-width:560px){main{padding:22px 14px}header{display:block}.badge{display:inline-block;margin-top:12px}.map-panel,aside{padding:14px;border-radius:12px}.map-head{align-items:start;flex-direction:column;gap:0}aside{display:block}.detail{border-left:0;border-top:1px solid var(--line);padding:14px 0 0;margin-top:14px;min-height:0}.spec{grid-template-columns:1fr;gap:12px}.legend{gap:12px}svg text{font-size:19px}.point-label{font-size:17px}}
+</style>
+</head>
+<body><main>
+<header><div><div class="eyebrow">TURTLEBOT3 / GAZEBO TRACK CONCEPT 02</div><h1>한 바퀴로 보여주는 자율주행</h1><p>Waffle Pi · 직선 → 장애물 회피 → 협소 통로 → 코너링 → 목표 정차 → 경사로 복귀</p></div><div class="badge">설계 검토용 · 제작 전</div></header>
+<div class="layout">
+<section class="map-panel" aria-label="트랙 평면도와 이동 예시">
+<div class="map-head"><strong>평면 배치 / 내부 유효 공간 8 × 6 m</strong><span>1칸 = 1 m · 북쪽 +Y / 오른쪽 +X</span></div>
+<svg viewBox="0 0 880 700" role="img" aria-labelledby="map-title map-desc">
+<title id="map-title">중앙 섬을 반시계 방향으로 도는 TurtleBot3 트랙</title><desc id="map-desc">내부 8미터 곱하기 6미터. 중앙 섬은 4미터 곱하기 2미터. 아래쪽에는 두 장애물, 오른쪽에는 폭 1.2미터 통로, 위쪽에는 목표 정차 지점, 왼쪽에는 길이 3.6미터, 높이 8센티미터의 경사로가 있다. 왼쪽 아래에서 출발해 오른쪽으로 진행한다.</desc>
+<defs><pattern id="grid" width="90" height="90" patternUnits="userSpaceOnUse" x="80" y="70"><path d="M90 0H0V90" fill="none" stroke="#304351" stroke-width="1"/></pattern><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#71e5bd"/></marker></defs>
+<rect x="66.5" y="56.5" width="747" height="567" rx="4" class="wall"/><rect x="80" y="70" width="720" height="540" fill="#1c2b36"/><rect x="80" y="70" width="720" height="540" fill="url(#grid)"/>
+<g aria-label="왼쪽 복귀 경사로, 위에서 아래로 진행">
+<rect x="80" y="205" width="180" height="135" fill="#8bbdf329" stroke="#8bbdf3"/>
+<rect x="80" y="340" width="180" height="54" fill="#8bbdf350" stroke="#8bbdf3"/>
+<rect x="80" y="394" width="180" height="135" fill="#8bbdf329" stroke="#8bbdf3"/>
+<path d="M90 239H250 M90 273H250 M90 307H250 M90 428H250 M90 462H250 M90 496H250" stroke="#8bbdf3" opacity=".25"/>
+<text x="230" y="260" text-anchor="middle" transform="rotate(90 230 260)">오르막</text>
+<text x="215" y="374" text-anchor="middle">8 cm</text>
+<text x="230" y="458" text-anchor="middle" transform="rotate(90 230 458)">내리막</text>
+<circle class="point" cx="110" cy="367" r="15"/><text class="point-label" x="110" y="367">6</text>
+</g>
+<path d="M80 35H800 M80 28V42 M800 28V42" stroke="#9aafbd"/><text x="440" y="25" text-anchor="middle">8.0 m</text><path d="M42 70V610 M35 70H49 M35 610H49" stroke="#9aafbd"/><text x="24" y="340" transform="rotate(-90 24 340)" text-anchor="middle">6.0 m</text>
+<rect x="260" y="250" width="360" height="180" rx="3" class="wall"/><text x="440" y="330" text-anchor="middle" style="fill:#101820;font-weight:700">중앙 고정 섬</text><text x="440" y="357" text-anchor="middle" style="fill:#101820">4.0 × 2.0 m</text>
+<rect x="728" y="277" width="72" height="126" class="wall"/><path d="M620 340H728 M620 332V348 M728 332V348" stroke="#f4b56c"/><text x="674" y="265" text-anchor="middle" style="fill:#f4b56c">1.2 m</text>
+<circle cx="350" cy="470.5" r="22.5" class="obs"/><circle cx="530" cy="569.5" r="22.5" class="obs"/>
+<rect x="399.5" y="119.5" width="81" height="81" rx="4" fill="#71e5bd0c" stroke="#71e5bd" stroke-dasharray="5 5"/><text x="440" y="106" text-anchor="middle">정차 0.9 × 0.9 m</text>
+<path id="route" d="M170 565 L287 565 Q305 565 305 547 Q305 538 323 538 L350 538 Q395 556 440 520 Q485 484 530 502 L665 520 Q710 520 700 466 L674 403 L674 277 Q674 160 710 160 L440 160 L215 160 Q170 160 170 205 L170 565" fill="none" stroke="#71e5bd" stroke-width="2.5" stroke-dasharray="7 7"/>
+<path d="M220 565H245 M674 380V360 M590 160H565 M170 370V395" stroke="#71e5bd" stroke-width="2" marker-end="url(#arrow)"/>
+<rect id="highlight" x="125" y="475" width="160" height="90" rx="16"/>
+<g><circle class="point" cx="170" cy="595" r="15"/><text class="point-label" x="170" y="595">1</text><circle class="point" cx="440" cy="590" r="15"/><text class="point-label" x="440" y="590">2</text><circle class="point" cx="767" cy="340" r="15"/><text class="point-label" x="767" y="340">3</text><circle class="point" cx="755" cy="160" r="15"/><text class="point-label" x="755" y="160">4</text><circle class="point" cx="440" cy="223" r="15"/><text class="point-label" x="440" y="223">5</text></g>
+<g id="robot"><rect x="-12.645" y="-13.77" width="25.29" height="27.54" rx="4" fill="#e5f5ee" stroke="#11271f" stroke-width="2"/><rect x="-9" y="-17" width="14" height="4" fill="#101820"/><rect x="-9" y="13" width="14" height="4" fill="#101820"/><circle r="5" fill="#1f7762"/><path d="M8 -4L15 0L8 4" fill="#1f7762"/></g>
+<text x="80" y="653">(0, 0)</text><text x="800" y="653" text-anchor="end">+X →</text><text x="95" y="98">+Y ↑</text><path d="M620 653H710 M620 648V658 M710 648V658" stroke="#acbfcb" stroke-width="2"/><text x="665" y="682" text-anchor="middle">1 m</text>
+</svg>
+<div class="legend"><span><i class="swatch"></i>충돌 벽 / 고정 섬</span><span><i class="swatch obs"></i>고정 장애물</span><span><i class="swatch" style="background:#8bbdf3"></i>경사로</span><span><i class="swatch route"></i>예시 경로</span></div>
+<div class="controls"><button id="play" type="button">이동 예시 재생</button><label for="progress" class="fine">경로 위치</label><input id="progress" type="range" min="0" max="1000" value="0"><output id="percent" for="progress" class="fine">0%</output></div>
+<p class="fine">약 20초로 압축한 경로 애니메이션입니다. 실제 센서·충돌·Nav2 제어 시뮬레이션이 아닙니다.</p>
+</section>
+<aside><h2>시연 구간</h2><div class="zones">
+<button data-zone="0" aria-pressed="true"><span class="num">01</span><span>출발과 직선 주행<small>위치 추정 확인 · +X 방향 출발</small></span></button>
+<button data-zone="1" aria-pressed="false"><span class="num">02</span><span>엇갈린 장애물 회피<small>지름 0.5 m 원기둥 2개</small></span></button>
+<button data-zone="2" aria-pressed="false"><span class="num">03</span><span>협소 통로 통과<small>벽 사이 유효 폭 1.2 m</small></span></button>
+<button data-zone="3" aria-pressed="false"><span class="num">04</span><span>90° 방향 전환<small>오른쪽 상단 코너</small></span></button>
+<button data-zone="4" aria-pressed="false"><span class="num">05</span><span>목표 정차와 복귀<small>상단 목표점 → 출발점</small></span></button>
+<button data-zone="5" aria-pressed="false"><span class="num">06</span><span>경사로를 지나 복귀<small>오르막 1.5 m → 평탄부 → 내리막</small></span></button>
+</div><div class="detail" aria-live="polite"><strong id="detail-title"></strong><p id="detail-text"></p></div></aside>
+</div>
+<section class="ramp-section" aria-label="경사로 측면 설계" style="margin-top:24px;border-top:1px solid var(--line);padding-top:22px">
+<div class="map-head"><strong>06 / 경사로 측면도 · 북쪽에서 남쪽으로 진행 →</strong><span>높이만 10배 확대 · 폭 2.0 m</span></div>
+<svg viewBox="0 0 880 245" role="img" aria-labelledby="ramp-title ramp-desc">
+<title id="ramp-title">높이 8센티미터, 약 3.05도 경사로 측면도</title><desc id="ramp-desc">수평 길이 기준 오르막 1.5미터, 평탄부 0.6미터, 내리막 1.5미터. 총 길이 3.6미터이며 높이는 보기 쉽게 열 배 확대했다.</desc>
+<path d="M40 170H840" stroke="#667c8d" stroke-width="2"/>
+<path d="M80 170L380 10H500L800 170Z" fill="#8bbdf326" stroke="#8bbdf3" stroke-width="2"/>
+<path d="M80 205H380 M380 205H500 M500 205H800 M80 199V211 M380 199V211 M500 199V211 M800 199V211" stroke="#acbfcb"/>
+<text x="230" y="235" text-anchor="middle">오르막 1.5 m</text><text x="440" y="235" text-anchor="middle">0.6 m</text><text x="650" y="235" text-anchor="middle">내리막 1.5 m</text>
+<text x="230" y="65" text-anchor="middle">+3.05°</text><text x="650" y="65" text-anchor="middle">−3.05°</text>
+<path d="M440 20V170 M432 20H448 M432 170H448" stroke="#8bbdf3" stroke-dasharray="4 4"/><text x="460" y="110">8 cm</text>
+<text x="50" y="155">0</text>
+</svg>
+<p>왼쪽 통로 전체 폭을 사용합니다. 북쪽 진입점 <strong>(1.0, 4.5)</strong> → 상단 <strong>y=3.0~2.4</strong> → 남쪽 이탈점 <strong>(1.0, 0.9)</strong> 순서입니다. 바닥 연결부는 턱 없이 제작할 계획입니다.</p>
+<p class="fine">출발점은 (1.0, 0.5) m로 옮겨 경사로 끝에서 0.4 m 떨어진 평지에 두었습니다. 경사로 치수는 초기 제안이며, Gazebo 제작 후 접지·미끄러짐·LiDAR 바닥 감지를 확인해야 합니다. 측면도는 형상 설명용이고 로봇의 높이·기울기 동역학은 아직 시뮬레이션하지 않습니다.</p>
+</section>
+<section class="spec" aria-label="제작 기준 제안">
+<article><h2>01 / 여유 있는 기본 치수</h2><div class="value">2.0 m 기본 통로</div><p>외벽 안쪽 8 × 6 m, 중앙 섬 4 × 2 m. 외벽 두께 0.15 m를 포함하면 외곽은 8.3 × 6.3 m입니다. 왼쪽 복귀 통로에만 높이 0.08 m 경사로를 넣고, 나머지는 평지로 유지합니다. 벽·장애물 높이는 0.5 m입니다.</p></article>
+<article><h2>02 / 강의용 주행 기준</h2><div class="value">약 3–4분 / 1회</div><p>예시 경로 약 <span id="distance">—</span> m, 제안 속도 0.15–0.18 m/s. 경사로는 0.10 m/s부터 검증할 계획입니다. 감속·정차를 포함한 예상이며 실제 시간은 검증이 필요합니다. Waffle Pi 공칭 크기 0.281 × 0.306 m를 축척에 반영했습니다.</p></article>
+<article><h2>03 / 시연 흐름</h2><div class="value">지도 → 목표 → 복귀</div><p>LiDAR + Nav2 기반을 가정합니다. 사전 SLAM으로 지도를 저장하고, 강의에서는 위치 추정 후 구간별 목표를 순서대로 전달합니다. 바닥 선은 추종용이 아닌 설계 표시입니다.</p></article>
+</section>
+<footer>검토 포인트: 전체 크기, 통로 난이도, 장애물 배치, 경사로 높이와 길이. 제작 요청 후 ROS 2·Gazebo 버전을 확인하고 월드와 launch 파일을 작성합니다. 현재는 설계 HTML만 제작했습니다.<br>로봇 치수 출처: <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/" target="_blank" rel="noopener noreferrer">ROBOTIS TurtleBot3 공식 사양</a> · 트랙 치수와 시연 속도는 설계 제안입니다.</footer>
+</main>
+<script>
+(()=>{'use strict';
+const path=document.getElementById('route'),robot=document.getElementById('robot'),slider=document.getElementById('progress'),percent=document.getElementById('percent'),play=document.getElementById('play'),highlight=document.getElementById('highlight');
+const length=path.getTotalLength();document.getElementById('distance').textContent=(length/90).toFixed(1);
+const zones=[
+{title:'출발점 (1.0, 0.5), yaw = 0',text:'출발 시 +X 방향으로 직진하여 (2.3, 0.5) m까지 경사로 아래 평지를 따라 이동합니다. 경사로의 오른쪽 경계 x=2.0 m를 로봇 몸체까지 벗어난 뒤 2번 장애물 구간으로 진입합니다.',box:[145,540,180,50]},
+{title:'두 장애물 사이로 경로 변경',text:'원기둥 중심은 (3.0, 1.55), (5.0, 0.45) m입니다. 각 지름은 0.5 m이며 반대편 벽까지 1.3 m가 열립니다. 고정 장애물에 대한 경로 계획을 관찰합니다.',box:[310,440,260,163]},
+{title:'최소 통로 폭 1.2 m',text:'중앙 섬의 x=6.0 m 면과 돌출벽의 x=7.2 m 면 사이를 통과합니다. 로봇 폭 기준 중앙 정렬 시 양쪽 약 0.447 m의 기하학적 여유가 있습니다. 실제 costmap 여유는 별도 조정합니다.',box:[624,280,100,120]},
+{title:'넓은 코너에서 방향 전환',text:'협소 통로를 빠져나온 뒤 왼쪽으로 회전합니다. 각진 중앙 섬 주변에서 감속과 자세 변화를 보여줍니다. 표시된 곡선은 설명용이며 실제 주행 경로는 플래너가 계산합니다.',box:[630,115,135,125]},
+{title:'목표점 (4.0, 5.0), yaw = π',text:'상단 0.9 m 정사각 구역에서 왼쪽을 향해 정차한 뒤 출발점으로 복귀합니다. 목표 허용 오차는 위치 0.15 m, 방향 10°를 초기 제안값으로 두고 제작 시 검증합니다.',box:[390,110,100,100]},
+{title:'완만한 오르막 → 평탄부 → 내리막',text:'통로 폭 2 m 전체에 길이 3.6 m, 높이 8 cm의 경사로를 배치했습니다. 오르막과 내리막의 수평 길이는 각각 1.5 m, 경사각은 약 3.05°입니다. 평탄부 0.6 m를 지나 남쪽으로 내려와 평지 출발점에 복귀합니다. 아래 측면도에서 높이를 확인하세요.',box:[82,205,176,324]}
+];
+function select(i){const z=zones[i];document.getElementById('detail-title').textContent=z.title;document.getElementById('detail-text').textContent=z.text;['x','y','width','height'].forEach((k,j)=>highlight.setAttribute(k,z.box[j]));document.querySelectorAll('[data-zone]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.zone)===i));}
+document.querySelectorAll('[data-zone]').forEach(b=>b.addEventListener('click',()=>select(Number(b.dataset.zone))));
+function draw(){let d=Number(slider.value)/1000*length;const p=path.getPointAtLength(d),a=path.getPointAtLength(Math.max(0,d-.5)),b=path.getPointAtLength(Math.min(length,d+.5));robot.setAttribute('transform',`translate(${p.x} ${p.y}) rotate(${Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI})`);percent.textContent=Math.round(Number(slider.value)/10)+'%';}
+let running=false,last=null,frame=0;
+function stop(){running=false;last=null;cancelAnimationFrame(frame);play.textContent='이동 예시 재생';}
+function tick(time){if(!running)return;if(last!==null)slider.value=Math.min(1000,Number(slider.value)+(time-last)/20);last=time;draw();if(Number(slider.value)>=1000){stop();return;}frame=requestAnimationFrame(tick);}
+play.addEventListener('click',()=>{if(running){stop();return;}if(Number(slider.value)>=1000)slider.value=0;running=true;play.textContent='일시 정지';frame=requestAnimationFrame(tick);});
+slider.addEventListener('input',()=>{stop();draw();});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});select(0);draw();
+})();
+</script></body></html>
