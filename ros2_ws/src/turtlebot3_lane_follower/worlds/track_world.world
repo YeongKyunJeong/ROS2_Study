@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="track_world">
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin
+      filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+
+    <!-- 밝고 균일한 조명 (컴퓨터 비전 카메라 인식 최적화) -->
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <scene>
+      <ambient>0.8 0.8 0.8 1.0</ambient>
+      <background>0.7 0.8 0.9 1.0</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <!-- 도로 트랙 바닥 모델 -->
+    <include>
+      <uri>model://track_ground</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- 상공에서 전체 트랙을 조감할 수 있는 기본 카메라 뷰 -->
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>0 -0.5 13.0 0 1.5707 1.5707</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+  </world>
+</sdf>
